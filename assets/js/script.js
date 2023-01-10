@@ -21,7 +21,11 @@ function clickEventHandler(event) {
 function submitEventHandler(event) {
   event.preventDefault();
   
-  let searchInput = $searchInput.value;
+  let searchInput = $searchInput.value.trim();
+
+  if (!searchInput) {
+    return;
+  }
   
   const requestUrl = `https://api.github.com/users/${searchInput}/repos`;
   
@@ -62,7 +66,7 @@ function renderDivs(data) { // once data exists, we need to show it to the user
     // create element
     const $a = document.createElement("a");
     // tell it what it looks like
-    $a.setAttribute("href", "#");
+    $a.setAttribute("href", `./repositories.html?repo=${creator}/${repoName}`);
     $a.classList = "list-group-item list-group-item-action d-flex justify-content-between";
 
     const $nameSpan = document.createElement("span");
